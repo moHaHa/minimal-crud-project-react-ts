@@ -4,7 +4,7 @@ import tokenService from './tokenService';
 
 export const baseURL = ((import.meta.env.VITE_API_BASE_URL as string) ?? '').trim()
 	? (import.meta.env.VITE_API_BASE_URL as string)
-	: 'https://foo/api';
+	: 'https://reqres.in/api';
 const http = axios.create({
 	baseURL,
 });
@@ -29,7 +29,9 @@ http.interceptors.response.use(
 	},
 	async (err: HttpError) => {
 		// Access Token was expired
-		console.log('err.response', err.response);
+		/**
+		 * Set up Auth
+		 */
 		if (err.response?.status === 401 && err.response?.data?.msg !== 'Invalid authentication email or password.') {
 			const refreshToken = tokenService.getLocalRefreshToken();
 			const rs = await axios

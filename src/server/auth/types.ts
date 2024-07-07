@@ -4,5 +4,8 @@ export type TUserMutation = {
 };
 
 export interface ILoginMutationResponse {
-	data: unknown;
+	username: string;
+	password: string;
+	id: string;
+	createdAt: string;
 }

@@ -13,23 +13,12 @@ class TokenService {
 		const accessToken = localStorage.getItem('accessToken');
 		return accessToken;
 	}
-	getTokenPayload(t?: string) {
-		const token = t ?? localStorage.getItem('accessToken') ?? '';
-		if (!token) return null;
-		const base64Url = token.split('.')[1];
-		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-		const jsonPayload = decodeURIComponent(
-			window
-				.atob(base64)
-				.split('')
-				.map(function (c) {
-					return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-				})
-				.join('')
-		);
-
-		return JSON.parse(jsonPayload) as ITokenPayload;
+	getLocalFakeAccessToken() {
+		const username = localStorage.getItem('username');
+		const password = localStorage.getItem('password');
+		return username && password ? { username, password } : undefined;
 	}
+
 	setLocalAccessToken(value: string) {
 		localStorage.setItem('accessToken', value);
 	}
@@ -39,6 +28,10 @@ class TokenService {
 	setAuthToken(accessToken: string, refreshToken: string) {
 		localStorage.setItem('accessToken', accessToken);
 		localStorage.setItem('refreshToken', refreshToken);
+	}
+	setFakeAuthToken(username: string, password: string) {
+		localStorage.setItem('username', username);
+		localStorage.setItem('password', password);
 	}
 	logout() {
 		localStorage.removeItem('accessToken');

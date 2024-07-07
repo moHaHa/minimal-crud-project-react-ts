@@ -1,22 +1,26 @@
 import { MessageInstance } from 'antd/es/message/interface';
 import useMessage from 'antd/es/message/useMessage';
 import { FC, ReactNode, createContext, useContext, useState } from 'react';
-import tokenService, { ITokenPayload } from '~/services/tokenService';
+import { TCurrentUser } from '~/server/users/type';
+import tokenService from '~/services/tokenService';
 
 interface AppContextType {
 	message: MessageInstance;
-	user: ITokenPayload | null;
-	setUser: React.Dispatch<React.SetStateAction<ITokenPayload | null>>;
+	user: TCurrentUser | undefined;
+	onSetUser: (value: TCurrentUser) => void;
 }
 
 const AppContext = createContext({} as AppContextType);
 
 export const AppContextProvider: FC<{ children?: ReactNode }> = ({ children }) => {
-	const [user, setUser] = useState<ITokenPayload | null>(tokenService.getTokenPayload());
 	const [message, messageContext] = useMessage();
+	const [user, setUser] = useState<TCurrentUser | undefined>(tokenService.getLocalFakeAccessToken());
+	const onSetUser = (value: TCurrentUser) => {
+		setUser(value);
+	};
 
 	return (
-		<AppContext.Provider value={{ message, user, setUser }}>
+		<AppContext.Provider value={{ onSetUser, user, message }}>
 			{children}
 			{messageContext}
 		</AppContext.Provider>

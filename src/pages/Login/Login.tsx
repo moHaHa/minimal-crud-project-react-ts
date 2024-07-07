@@ -1,25 +1,30 @@
 import { Button, Card, Form, Input, Typography, message } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '~/app/context/LayoutContext/AppContext';
+import { TUserMutation } from '~/server/auth/types';
 import { useLoginMutation } from '~/server/auth/useLoginMutation';
+import tokenService from '~/services/tokenService';
 
 const { Text } = Typography;
 
 const Login: React.FC = () => {
+	const navigate = useNavigate();
+	const { onSetUser } = useAppContext();
 	const { isLoading, mutate } = useLoginMutation({
 		onError(error) {
-			message.error('error');
+			// message.error();
 		},
 		onSuccess(data) {
-			if (true) {
-				message.info('set up saving access token and refresh token');
-				// TokenService.setAuthToken(data?.data?.accessToken, data?.data?.refreshToken);
-				// refetch();
-			}
+			message.info('set up saving access token and refresh token');
+			tokenService.setAuthToken(data.id, data.id);
+			onSetUser({ username: data.username, password: data.password });
+			navigate('/');
 		},
 	});
 
-	const onFinish = (values: any) => {
-		// mutate(params);
+	const onFinish = (values: TUserMutation) => {
+		mutate(values);
 	};
 
 	return (
