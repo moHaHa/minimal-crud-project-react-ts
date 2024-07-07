@@ -1,7 +1,7 @@
 import { MessageInstance } from 'antd/es/message/interface';
 import useMessage from 'antd/es/message/useMessage';
 import { FC, ReactNode, createContext, useContext, useState } from 'react';
-import { TCurrentUser } from '~/server/users/type';
+import { TCurrentUser } from '~/server/users/types';
 import tokenService from '~/services/tokenService';
 
 interface AppContextType {
