@@ -31,14 +31,18 @@ pnpm run dev
 
 ```json
 {
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "antfu.icons-carbon",
-    "streetsidesoftware.code-spell-checker",
-    "naumovs.color-highlight",
-    "eamodio.gitlens",
-    "PKief.material-icon-theme",
-    "antfu.where-am-i"
-  ]
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"antfu.icons-carbon",
+		"streetsidesoftware.code-spell-checker",
+		"naumovs.color-highlight",
+		"eamodio.gitlens",
+		"PKief.material-icon-theme",
+		"antfu.where-am-i"
+	]
 }
 ```
+
+![alt text](image.png)
+
+![alt text](image-1.png)
