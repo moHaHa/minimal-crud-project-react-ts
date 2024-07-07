@@ -1,11 +1,18 @@
-import React from 'react';
+import { ConfigProvider } from 'antd';
 import ReactDOM from 'react-dom/client';
+import { QueryClientProvider } from 'react-query';
+import App from './app/App.tsx';
+import { AppContextProvider } from './app/context/LayoutContext/AppContext.tsx';
 import './index.css';
-import { RouterProvider } from 'react-router-dom';
-import routers from './router/index.tsx';
+import queryClient from './services/queryClient.ts';
+import { theme } from './theme.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RouterProvider router={routers}></RouterProvider>
-  </React.StrictMode>,
+	<ConfigProvider theme={theme}>
+		<QueryClientProvider client={queryClient}>
+			<AppContextProvider>
+				<App />
+			</AppContextProvider>
+		</QueryClientProvider>
+	</ConfigProvider>
 );
