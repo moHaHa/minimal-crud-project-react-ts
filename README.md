@@ -43,6 +43,14 @@ pnpm run dev
 }
 ```
 
+## Demo
+
+https://minimal-crud-project-react-ts.netlify.app
+
+### Login
+
 ![alt text](image.png)
+
+### Users
 
 ![alt text](image-1.png)
