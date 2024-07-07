@@ -17,9 +17,10 @@ const Login: React.FC = () => {
 		},
 		onSuccess(data) {
 			message.info('set up saving access token and refresh token');
-			tokenService.setAuthToken(data.id, data.id);
+			// tokenService.setAuthToken();
+			tokenService.setFakeAuthToken(data.username, data.password);
 			onSetUser({ username: data.username, password: data.password });
-			navigate('/');
+			window.location.href = '/';
 		},
 	});
 

@@ -37,5 +37,9 @@ class TokenService {
 		localStorage.removeItem('accessToken');
 		localStorage.removeItem('refreshToken');
 	}
+	fakeLogout() {
+		localStorage.removeItem('username');
+		localStorage.removeItem('password');
+	}
 }
 export default new TokenService();
